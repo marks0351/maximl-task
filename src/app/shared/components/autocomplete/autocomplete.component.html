@@ -1,1 +1,1 @@
-<input type="text" [placeholder]='placeholder'>
+<input type="text" class="form-control mx-sm-3" [inputFormatter]='resultFormatter' [resultFormatter]='resultFormatter'  [(ngModel)]="model" [ngbTypeahead]="fireAutoCompleteFn" placeholder="Search City" />

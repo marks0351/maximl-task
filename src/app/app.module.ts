@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { WeatherLayerModule } from './weather-layer/weather-layer.module';
 
 @NgModule({
@@ -13,7 +12,6 @@ import { WeatherLayerModule } from './weather-layer/weather-layer.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
     WeatherLayerModule,
   ],
   providers: [],

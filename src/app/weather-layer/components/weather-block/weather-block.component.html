@@ -1,3 +1,3 @@
 <div class="weather-block-wrapper">
-    <app-autocomplete placeholder='Enter City to Fetch Weather'></app-autocomplete>
+    <app-autocomplete placeholder='Enter City to Fetch Weather' [autoCompleteFn]='weatherService.getCities.bind(weatherService)'></app-autocomplete>
 </div>

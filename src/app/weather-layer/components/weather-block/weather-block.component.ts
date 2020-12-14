@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { WeatherService } from '../../services/weather.service';
 
 @Component({
   selector: 'app-weather-block',
@@ -8,7 +9,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 })
 export class WeatherBlockComponent implements OnInit {
 
-  constructor() { }
+  constructor(public weatherService: WeatherService) { }
 
   ngOnInit(): void {
   }
