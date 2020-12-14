@@ -1,0 +1,10 @@
+.weather-blocks-wrapper{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    height: 100%;
+    app-weather-block{
+        display: flex;
+        flex: 0 0 33.333333%;
+    }
+}
