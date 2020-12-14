@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
 @Component({
@@ -10,7 +10,8 @@ import {catchError, debounceTime, distinctUntilChanged, map, switchMap} from 'rx
 export class AutocompleteComponent implements OnInit {
   @Input() placeholder = ''
   @Input() autoCompleteFn: any;
-  public model : any
+  @Input() model : any
+  @Output() onSelect = new EventEmitter();
   public fireAutoCompleteFn = (inputValue: Observable<any>)=>{
     return inputValue.pipe(
       debounceTime(300),
@@ -25,6 +26,9 @@ export class AutocompleteComponent implements OnInit {
     }), catchError(()=>{
       return []
     }));
+  }
+  OnSelectItem({item}: any){
+    this.onSelect.emit(item.name)
   }
 
   resultFormatter(entry: any){

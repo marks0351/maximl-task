@@ -1,6 +1,36 @@
+app-autocomplete{
+    width: 100%;
+}
+.button{
+    margin-right: 10px;
+}
+
 .weather-block-wrapper{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    .weather-data-presenter{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        &.clouds{
+            background-image: url('../../../../assets/images/clouds.jpg');
+        }
+        &.clear{
+            background-image: url('../../../../assets/images/clear.jpg');
+        }
+        &.haze{
+            background-image: url('../../../../assets/images/haze.jpg');
+        }
+        &.mist{
+            background-image: url('../../../../assets/images/mist.jpg');
+        }
+        &.rain{
+            background-image: url('../../../../assets/images/rain.jpg');
+        }
+    }
 }

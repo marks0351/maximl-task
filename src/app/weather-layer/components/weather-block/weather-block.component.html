@@ -1,3 +1,14 @@
 <div class="weather-block-wrapper">
-    <app-autocomplete placeholder='Enter City to Fetch Weather' [autoCompleteFn]='weatherService.getCities.bind(weatherService)'></app-autocomplete>
+    <ng-container *ngIf='editMode'>
+        <app-autocomplete placeholder='Enter City to Fetch Weather' (onSelect)='onCitySelect($event)' [autoCompleteFn]='cityAutocompleteCallback.bind(this)'></app-autocomplete>
+        <input class="button" type="button" *ngIf='cityValue' (click)="showCityWeather()" value="Save">
+        <input class="button" type="button" onclick="" ngbButton value='Cancel'>
+    </ng-container>
+    <ng-container *ngIf='!editMode'>
+        <div [ngClass]="['weather-data-presenter', getWeatherBackgroundClass()]">
+            <div class="label">City Name: {{cityValue}}</div>
+            <div class="label">City Temperate: {{getTemperature()}}</div>
+            <div class="label">Weather: {{getWeatherDesc()}}</div>
+        </div>
+    </ng-container>
 </div>
