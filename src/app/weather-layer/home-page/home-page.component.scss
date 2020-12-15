@@ -2,10 +2,22 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    height: 100%;
+    height: calc(100% - 70px);
+    margin: 10px 20px;
     app-weather-block{
         display: flex;
         flex: 0 0 33.333333%;
-        height: 33.333vh;
+        height: 30.333vh;
     }
+}
+.home-page-title{
+    font-size: 20px;
+    font-weight: bolder;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: goldenrod;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+    color: slateblue;
+    height: 50px;
 }

@@ -10,9 +10,10 @@ import { WeatherService } from '../../services/weather.service';
 })
 export class WeatherBlockComponent implements OnInit {
   public cityValue = ''
+  public selectedCityValue = ''
   private cachedWeatherData: any
   public selectedWeatherData: any
-  public editMode = true;
+  public editMode = false;
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
@@ -34,26 +35,31 @@ export class WeatherBlockComponent implements OnInit {
   }
 
   fetchWeatherFromCache(name: string){
-    return this.cachedWeatherData.find((each: any)=>{
-      return (each.name === this.cityValue)
+    const data = this.cachedWeatherData.find((each: any)=>{
+      return (each.name === this.selectedCityValue)
     })
+    return {
+      name: this.selectedCityValue,
+      styleClass: data.weather[0].main.toLowerCase(),
+      description: data.weather[0].description,
+      temperature: `${(data.main.temp + 0 - 273.15).toFixed(2)}°C`
+    }
   }
 
   showCityWeather(){
     this.editMode = false;
     if(this.cityValue){
+      this.selectedCityValue = this.cityValue
       this.selectedWeatherData = this.fetchWeatherFromCache(this.cityValue)
     }
   }
 
-  getWeatherBackgroundClass(){
-    return this.selectedWeatherData.weather[0].main.toLowerCase()
+  clearInput(){
+    this.cityValue = ''
+    this.selectedCityValue = ''
+    this.selectedWeatherData = null
+    this.editMode = false;
   }
-  getWeatherDesc(){
-    return this.selectedWeatherData.weather[0].description
-  }
-  getTemperature(){
-    return `${this.selectedWeatherData.main.temp + 0 - 273.15}°C`
-  }
+
 
 }

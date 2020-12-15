@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import {catchError, debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
+import {catchError, debounceTime, distinctUntilChanged, first, map, switchMap} from 'rxjs/operators';
 @Component({
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
@@ -10,7 +10,7 @@ import {catchError, debounceTime, distinctUntilChanged, map, switchMap} from 'rx
 export class AutocompleteComponent implements OnInit {
   @Input() placeholder = ''
   @Input() autoCompleteFn: any;
-  @Input() model : any
+  @Input() model!: string
   @Output() onSelect = new EventEmitter();
   public fireAutoCompleteFn = (inputValue: Observable<any>)=>{
     return inputValue.pipe(

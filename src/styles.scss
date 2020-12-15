@@ -19,3 +19,18 @@
         background-image: url('/assets/images/rain.jpg');
     }
 }
+
+body{
+    font-family: Sans-serif
+}
+
+input[type=button]{
+    color: white;
+    border-color: chocolate;
+    border-radius: 15%;
+    background-color: cornflowerblue;
+    &:focus{
+        border-color: chocolate;
+        outline:0;
+    }
+}

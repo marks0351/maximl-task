@@ -1,1 +1,1 @@
-<input type="text" class="form-control mx-sm-3" [inputFormatter]='resultFormatter' (selectItem)='OnSelectItem($event)' [resultFormatter]='resultFormatter'  [(ngModel)]="model" [ngbTypeahead]="fireAutoCompleteFn" placeholder="Search City" />
+<input type="text" autofocus class="form-control mx-sm-3" [inputFormatter]='resultFormatter' (selectItem)='OnSelectItem($event)' editable='true' [resultFormatter]='resultFormatter'  [(ngModel)]="model" [ngbTypeahead]="fireAutoCompleteFn" placeholder="Search City" />

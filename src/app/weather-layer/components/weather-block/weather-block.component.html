@@ -1,14 +1,23 @@
 <div class="weather-block-wrapper">
     <ng-container *ngIf='editMode'>
-        <app-autocomplete placeholder='Enter City to Fetch Weather' (onSelect)='onCitySelect($event)' [autoCompleteFn]='cityAutocompleteCallback.bind(this)'></app-autocomplete>
+        <app-autocomplete placeholder='Enter City to Fetch Weather' [model]='cityValue' (onSelect)='onCitySelect($event)' [autoCompleteFn]='cityAutocompleteCallback.bind(this)'></app-autocomplete>
         <input class="button" type="button" *ngIf='cityValue' (click)="showCityWeather()" value="Save">
-        <input class="button" type="button" onclick="" ngbButton value='Cancel'>
+        <input class="button" type="button" (click)="editMode=!editMode;" ngbButton value='Cancel'>
     </ng-container>
     <ng-container *ngIf='!editMode'>
-        <div [ngClass]="['weather-data-presenter', getWeatherBackgroundClass()]">
-            <div class="label">City Name: {{cityValue}}</div>
-            <div class="label">City Temperate: {{getTemperature()}}</div>
-            <div class="label">Weather: {{getWeatherDesc()}}</div>
+        <div *ngIf='!!selectedWeatherData' [ngClass]="['weather-data-presenter', selectedWeatherData.styleClass]">
+            <div class='actions'>
+                <input class="button clear-button" type="button" (click)="clearInput()" value="Clear">
+                <input class="button edit-button" type="button" (click)="editMode=!editMode;" value="Edit">
+            </div>
+            <div class="data-presenter">
+                <div class="label">City Name: {{selectedWeatherData.name}}</div>
+                <div class="label">City Temperate: {{selectedWeatherData.temperature}}</div>
+                <div class="label">Weather: {{selectedWeatherData.description}}</div>
+            </div>
+        </div>
+        <div *ngIf='!selectedWeatherData'>
+            <div class="add-weather-block" (click)='editMode=!editMode'>+</div>
         </div>
     </ng-container>
 </div>
