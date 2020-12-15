@@ -20,6 +20,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "ngswConfigPath": "ngsw-config.json",
+            "serviceWorker": true,
             "outputPath": "dist/demo-app",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -28,7 +30,7 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets/"
             ],
             "styles": [
               "src/styles.scss"
@@ -43,6 +45,8 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "ngswConfigPath": "ngsw-config.json",
+              "serviceWorker": true,
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,

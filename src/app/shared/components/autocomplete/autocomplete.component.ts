@@ -12,7 +12,7 @@ export class AutocompleteComponent implements OnInit {
   @Input() autoCompleteFn: any;
   @Input() model!: string
   @Output() onSelect = new EventEmitter();
-  public fireAutoCompleteFn = (inputValue: Observable<any>)=>{
+  public fireAutoCompleteFn = (inputValue: Observable<string>)=>{
     return inputValue.pipe(
       debounceTime(300),
       distinctUntilChanged(),
@@ -20,7 +20,7 @@ export class AutocompleteComponent implements OnInit {
   }
   constructor() { }
 
-  autoFn(text: string){
+  autoFn(text: string): Observable<readonly any[]>{
     return this.autoCompleteFn(text).pipe(map((results: any) => {
       return results.list;
     }), catchError(()=>{
