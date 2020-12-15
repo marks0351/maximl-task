@@ -7,6 +7,7 @@ import { WeatherLayerRouteRoutingModule } from './weather-layer-routing.module';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SharedModule } from '../shared/shared.module';
 import { WeatherService } from './services/weather.service';
+import { WeatherDataSyncService } from './services/weather-data-sync.service';
 
 
 
@@ -18,7 +19,7 @@ import { WeatherService } from './services/weather.service';
     SharedModule,
     WeatherLayerRouteRoutingModule,
   ],
-  providers: [WeatherService],
+  providers: [WeatherService, WeatherDataSyncService],
   bootstrap: [WeatherBlockComponent]
 })
 export class WeatherLayerModule { }

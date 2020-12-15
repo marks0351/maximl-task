@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { of } from 'rxjs';
+import { WeatherDataSyncService } from '../../services/weather-data-sync.service';
 import { WeatherService } from '../../services/weather.service';
 
 @Component({
@@ -14,9 +15,23 @@ export class WeatherBlockComponent implements OnInit {
   private cachedWeatherData: any
   public selectedWeatherData: any
   public editMode = false;
-  constructor(private weatherService: WeatherService) { }
+  private lastFetchTime!: Date;
+  @Input() blockId!: number;
+  constructor(private weatherService: WeatherService, private weatherDataSyncService: WeatherDataSyncService) { }
 
   ngOnInit(): void {
+    this.syncWithStore()
+    this.weatherDataSyncService.refreshStore.subscribe(()=>{
+      this.syncWithStore()
+    })
+  }
+
+  syncWithStore(){
+    const storeData = this.weatherDataSyncService.fetchFromStore(this.blockId)
+    if(storeData){
+      this.selectedWeatherData = storeData;
+      this.selectedCityValue = storeData.name;
+    }
   }
 
   cityAutocompleteCallback(cityName: string){
@@ -24,6 +39,7 @@ export class WeatherBlockComponent implements OnInit {
       const apiCall = this.weatherService.getCities(cityName)
       apiCall.subscribe((results: any)=>{
         this.cachedWeatherData = results.list
+        this.lastFetchTime = new Date()
       })
       return apiCall
     }
@@ -38,12 +54,7 @@ export class WeatherBlockComponent implements OnInit {
     const data = this.cachedWeatherData.find((each: any)=>{
       return (each.name === this.selectedCityValue)
     })
-    return {
-      name: this.selectedCityValue,
-      styleClass: data.weather[0].main.toLowerCase(),
-      description: data.weather[0].description,
-      temperature: `${(data.main.temp + 0 - 273.15).toFixed(2)}°C`
-    }
+    return this.weatherDataSyncService.extractWeatherData(data)
   }
 
   showCityWeather(){
@@ -51,6 +62,7 @@ export class WeatherBlockComponent implements OnInit {
     if(this.cityValue){
       this.selectedCityValue = this.cityValue
       this.selectedWeatherData = this.fetchWeatherFromCache(this.cityValue)
+      this.weatherDataSyncService.syncToStore(this.selectedWeatherData, this.blockId+'')
     }
   }
 
@@ -59,7 +71,6 @@ export class WeatherBlockComponent implements OnInit {
     this.selectedCityValue = ''
     this.selectedWeatherData = null
     this.editMode = false;
+    this.weatherDataSyncService.syncToStore(undefined, this.blockId+'')
   }
-
-
 }
