@@ -17,7 +17,7 @@ export class WeatherBlockComponent implements OnInit {
   public editMode = false;
   private lastFetchTime!: Date;
   @Input() blockId!: number;
-  constructor(private weatherService: WeatherService, private weatherDataSyncService: WeatherDataSyncService, private cdr: ChangeDetectorRef) { }
+  constructor(private weatherService: WeatherService, private weatherDataSyncService: WeatherDataSyncService) { }
 
   ngOnInit(): void {
     this.syncWithStore()
@@ -48,7 +48,6 @@ export class WeatherBlockComponent implements OnInit {
 
   onCitySelect(value: any){
     this.cityValue = value;
-    this.cdr.detectChanges();
   }
 
   fetchWeatherFromCache(name: string){

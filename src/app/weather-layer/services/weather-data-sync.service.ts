@@ -9,7 +9,15 @@ export class WeatherDataSyncService {
   private readonly storeKey = 'weatherStoreKey'
   private refreshSubject = new Subject();
   constructor(private weatherService: WeatherService) {
+    this.initStore();
     this.startSyncingWeatherData();
+  }
+
+  private initStore(){
+    const store = localStorage.getItem(this.storeKey)
+    if(!store){
+      localStorage.setItem(this.storeKey, JSON.stringify({}))
+    }
   }
 
   public get refreshStore(){

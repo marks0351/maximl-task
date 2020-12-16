@@ -18,7 +18,7 @@ export class AutocompleteComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((text) => this.autoFn(text)))
   }
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor() { }
 
   autoFn(text: string): Observable<readonly any[]>{
     return this.autoCompleteFn(text).pipe(map((results: any) => {
@@ -29,11 +29,10 @@ export class AutocompleteComponent implements OnInit {
   }
   OnSelectItem({item}: any){
     this.onSelect.emit(item.name)
-    this.cdr.detectChanges()
   }
 
   resultFormatter(entry: any){
-    return entry.name
+    return entry?.name || ''
   }
 
   ngOnInit(): void {
