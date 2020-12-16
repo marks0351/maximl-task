@@ -1,9 +1,9 @@
 <div class="weather-block-wrapper">
-    <ng-container *ngIf='editMode'>
+    <div class="container edit-mode-presenter" *ngIf='editMode'>
         <app-autocomplete placeholder='Enter City to Fetch Weather' [model]='cityValue' (onSelect)='onCitySelect($event)' [autoCompleteFn]='cityAutocompleteCallback.bind(this)'></app-autocomplete>
         <input class="button" type="button" *ngIf='cityValue' (click)="showCityWeather()" value="Save">
         <input class="button" type="button" (click)="editMode=!editMode;" ngbButton value='Cancel'>
-    </ng-container>
+    </div>
     <ng-container *ngIf='!editMode'>
         <div *ngIf='!!selectedWeatherData' [ngClass]="['weather-data-presenter', selectedWeatherData.styleClass]">
             <div class='actions'>

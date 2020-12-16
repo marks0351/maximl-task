@@ -1,11 +1,14 @@
 .weather-blocks-wrapper{
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
     height: calc(100% - 70px);
-    margin: 10px 20px;
+    justify-content: center;
+    max-width: 90vw;
+
     app-weather-block{
         display: flex;
+        min-width: 300px;
+        min-height: 200px;
         flex: 0 0 33.333333%;
         height: 30.333vh;
     }

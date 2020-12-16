@@ -1,5 +1,5 @@
 <div class='home-page-title'>Weather Dashboard</div>
-<div class="weather-blocks-wrapper">
+<div class="weather-blocks-wrapper container">
     <ng-container *ngFor="let a of [].constructor(weatherBlocks);let id = index;">
         <app-weather-block [blockId]='id'></app-weather-block>
     </ng-container>

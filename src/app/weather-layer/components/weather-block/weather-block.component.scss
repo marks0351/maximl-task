@@ -1,8 +1,11 @@
 app-autocomplete{
-    width: 100%;
+    width: calc(90% - 80px);
 }
 .button{
     margin-right: 10px;
+}
+.edit-mode-presenter{
+    display: flex;
 }
 
 .weather-block-wrapper{
