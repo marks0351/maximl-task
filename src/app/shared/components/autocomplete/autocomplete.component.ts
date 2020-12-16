@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, first, map, switchMap} from 'rxjs/operators';
 @Component({
@@ -18,7 +18,7 @@ export class AutocompleteComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((text) => this.autoFn(text)))
   }
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
   autoFn(text: string): Observable<readonly any[]>{
     return this.autoCompleteFn(text).pipe(map((results: any) => {
@@ -29,6 +29,7 @@ export class AutocompleteComponent implements OnInit {
   }
   OnSelectItem({item}: any){
     this.onSelect.emit(item.name)
+    this.cdr.detectChanges()
   }
 
   resultFormatter(entry: any){

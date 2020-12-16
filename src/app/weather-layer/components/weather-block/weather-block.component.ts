@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, ChangeDetectorRef } from '@angular/core';
 import { of } from 'rxjs';
 import { WeatherDataSyncService } from '../../services/weather-data-sync.service';
 import { WeatherService } from '../../services/weather.service';
@@ -17,7 +17,7 @@ export class WeatherBlockComponent implements OnInit {
   public editMode = false;
   private lastFetchTime!: Date;
   @Input() blockId!: number;
-  constructor(private weatherService: WeatherService, private weatherDataSyncService: WeatherDataSyncService) { }
+  constructor(private weatherService: WeatherService, private weatherDataSyncService: WeatherDataSyncService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.syncWithStore()
@@ -48,6 +48,7 @@ export class WeatherBlockComponent implements OnInit {
 
   onCitySelect(value: any){
     this.cityValue = value;
+    this.cdr.detectChanges();
   }
 
   fetchWeatherFromCache(name: string){
